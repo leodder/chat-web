@@ -31,6 +31,7 @@ export const signup = async (req, res) => {
     });
     if (newUser) {
       // generate jwt token here
+      // generateToken = 產生 JWT（後端） + 寫入瀏覽器 cookie（前端）
       generateToken(newUser._id, res);
       await newUser.save();
       res.status(201).json({
@@ -59,6 +60,7 @@ export const login = async (req, res) => {
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
+    // generateToken = 產生 JWT（後端） + 寫入瀏覽器 cookie（前端）
     generateToken(user._id, res);
     res.status(200).json({
       _id: user._id,

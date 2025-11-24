@@ -5,6 +5,7 @@ import {
   logout,
   updateProfile,
 } from "../controllers/auth.controller.js";
+import { protectRoute } from "../middlerware/auth.middleware.js";
 
 const router = express.Router();
 
