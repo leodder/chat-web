@@ -31,10 +31,11 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
     if (newUser) {
+      await newUser.save();
       // generate jwt token here
       // generateToken = 產生 JWT（後端） + 寫入瀏覽器 cookie（前端）
       generateToken(newUser._id, res);
-      await newUser.save();
+      // await newUser.save();
       res.status(201).json({
         _id: newUser._id,
         email: newUser.email,
