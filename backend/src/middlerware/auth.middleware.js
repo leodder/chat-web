@@ -21,6 +21,7 @@ export const protectRoute = async (req, res, next) => {
     if (!decoded) {
       return res.status(401).json({ message: "Unauthorized - Invalid Token" });
     }
+    // User的方法是mongoose提供
     const user = await User.findById(decoded.userId).select("-password");
     // console.log(user);
     if (!user) {

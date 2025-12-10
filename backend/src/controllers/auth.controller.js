@@ -18,6 +18,7 @@ export const signup = async (req, res) => {
     }
     // 註冊email已存在，直接return
     const user = await User.findOne({ email });
+    // User的方法是mongoose提供
     if (user) {
       return res.status(400).json({ message: "Eamil already exist" });
     }
@@ -31,6 +32,7 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
     if (newUser) {
+      // save to database
       await newUser.save();
       // generate jwt token here
       // generateToken = 產生 JWT（後端） + 寫入瀏覽器 cookie（前端）
