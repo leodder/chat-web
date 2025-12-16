@@ -12,7 +12,9 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 // components
-import AuthImagePattern  from "../components/AuthImagePattern"; 
+import AuthImagePattern from "../components/AuthImagePattern";
+// toast
+import { toast } from "react-hot-toast";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,9 +24,22 @@ const SignUpPage = () => {
     password: "",
   });
   const { signup, isSigningUp } = useAuthStore();
-  const validateForm = () => {};
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full name is requored");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      return toast.error("Invalid Email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 6)
+      return toast.error("Password must be at least 6 characters long");
+    return true;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const success = validateForm();
+    if (success === true) {
+      return signup(formData);
+    }
   };
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
@@ -94,7 +109,7 @@ const SignUpPage = () => {
                 <input
                   className={`input input-bordered w-full pl-10`}
                   type={showPassword ? "text" : "password"}
-                  placeholder="OOOOOOO"
+                  placeholder="OOOOOOOO"
                   value={formData.password}
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
