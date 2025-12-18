@@ -69,6 +69,7 @@ const LoginPage = () => {
                 />
                 <button
                   className="absolute right-0 top-0 bottom-0 pr-4"
+                  type="button"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
