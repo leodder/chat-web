@@ -67,6 +67,8 @@ const LoginPage = () => {
                 <input
                   className={`input input-bordered w-full pl-10`}
                   type={showPassword ? "text" : "password"}
+                  placeholder="OOOOOOOO"
+                  value={formData.password}
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
                   }

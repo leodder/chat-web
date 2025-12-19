@@ -66,4 +66,7 @@ export const useAuthStore = create((set) => ({
       console.log("Error in logout:", error);
     }
   },
+  updateProfile: async (data) => {
+
+  }
 }));
