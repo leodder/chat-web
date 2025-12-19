@@ -7,6 +7,7 @@ import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 // components
 import AuthImagePattern from "../components/AuthImagePattern";
+
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -66,6 +67,9 @@ const LoginPage = () => {
                 <input
                   className={`input input-bordered w-full pl-10`}
                   type={showPassword ? "text" : "password"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
                 />
                 <button
                   className="absolute right-0 top-0 bottom-0 pr-4"
@@ -88,6 +92,7 @@ const LoginPage = () => {
               {isLoggingIn ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
+                  Loading...
                 </>
               ) : (
                 <>Sign In</>
