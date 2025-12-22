@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 // icons
 import { Camera, Mail, User } from "lucide-react";
 
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
-  const handleImageUpload = async (e) => {};
+  const [selectedImage, setSelectedImage] = useState(null);
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    // 限制檔案類型
+    // if (!file.type.startsWith("image/")) {
+    //   alert("Please upload an image file");
+    //   return;
+    // }
+    // 限制檔案大小
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Image too large");
+      return;
+    }
+    // FileReader 是 瀏覽器內建 API
+    // 用途：
+    // 把 File / Blob 轉成
+    // base64（最常用）
+    // text
+    // arrayBuffer
+    const reader = new FileReader();
+    // 開始讀圖片（非同步）
+    reader.readAsDataURL(file);
+    // 當 readAsDataURL 完成時瀏覽器會自動呼叫這個 function
+    reader.onload = async () => {
+      const base64Image = reader.result;
+      setSelectedImage(base64Image);
+      await updateProfile({ profilePic: base64Image });
+    };
+  };
+  console.log(authUser);
   return (
     <div className="h-screen pt-20">
       <div className="max-w-2xl mx-auto p-4 py-8">
@@ -20,7 +50,7 @@ const ProfilePage = () => {
               <img
                 alt="Profile"
                 className="size-32 rounded-all object-cover border-4"
-                src={authUser?.profilePic || "/avatar.png"}
+                src={selectedImage || authUser?.profilePic || "/avatar.png"}
               />
               <label
                 htmlFor="avatar-upload"
