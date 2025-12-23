@@ -8,6 +8,7 @@ const ProfilePage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
+    // console.log(file);
     if (!file) return;
     // 限制檔案類型
     // if (!file.type.startsWith("image/")) {
@@ -31,11 +32,12 @@ const ProfilePage = () => {
     // 當 readAsDataURL 完成時瀏覽器會自動呼叫這個 function
     reader.onload = async () => {
       const base64Image = reader.result;
+      // console.log(base64Image);
       setSelectedImage(base64Image);
       await updateProfile({ profilePic: base64Image });
     };
   };
-  console.log(authUser);
+  // console.log(authUser);
   return (
     <div className="h-screen pt-20">
       <div className="max-w-2xl mx-auto p-4 py-8">
