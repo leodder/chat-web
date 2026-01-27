@@ -11,11 +11,16 @@ const io = new Server(server, {
   },
 });
 
+export function getReceiverSocketId(userId) {
+  return userSocketMap[userId];
+}
+
 // used to store online users
 const userSocketMap = {};
 
 io.on("connection", (socket) => {
   console.log("A user connected", socket.id);
+  //   console.log("socket:", socket);
 
   const userId = socket.handshake.query.userId;
   if (userId) userSocketMap[userId] = socket.id;
