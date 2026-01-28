@@ -5,9 +5,19 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  // "https://<你的firebase專案id>.web.app",
+  "https://chat-web-9911f.web.app/",
+  // "https://<你的firebase專案id>.firebaseapp.com",
+  "https://chat-web-9911f.firebaseapp.com/",
+];
+
+
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: allowedOrigins,
+    credentials: true,
   },
 });
 
@@ -30,7 +40,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("A user disconnected", socket.id);
-    delete userSocketMap[userId];
+    if (userId) delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
