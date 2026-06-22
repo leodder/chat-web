@@ -26,9 +26,9 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   // "https://<你的firebase專案id>.web.app",
-  "https://chat-web-9911f.web.app/",
+  "https://chat-web-9911f.web.app",
   // "https://<你的firebase專案id>.firebaseapp.com",
-  "https://chat-web-9911f.firebaseapp.com/",
+  "https://chat-web-9911f.firebaseapp.com",
 ];
 
 app.use(
