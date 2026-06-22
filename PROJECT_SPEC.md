@@ -1291,7 +1291,9 @@ cd frontend
 npm run build  # 輸出到 dist/ 目錄
 
 # Firebase 部署
-firebase deploy
+# firebase deploy
+只部署前端部分要加 --only hosting
+firebase deploy --only hosting
 ```
 
 ### Firebase 配置（`firebase.json`）
