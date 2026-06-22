@@ -10,7 +10,7 @@ const ChatContainer = () => {
   const {
     messages,
     getMessages,
-    isMessagesLoading,
+    isMessageLoading,
     selectedUser,
     subscribeToMessages,
     unsubscribeFromMessage,
@@ -32,7 +32,7 @@ const ChatContainer = () => {
       messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
-  if (isMessagesLoading) {
+  if (isMessageLoading) {
     return (
       <div className="flex flex-1 flex-col overflow-auto">
         <ChatHeader />

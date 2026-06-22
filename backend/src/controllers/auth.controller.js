@@ -40,6 +40,7 @@ export const signup = async (req, res) => {
       // await newUser.save();
       res.status(201).json({
         _id: newUser._id,
+        fullName: newUser.fullName,
         email: newUser.email,
         profilePic: newUser.profilePic,
       });
@@ -112,6 +113,6 @@ export const checkAuth = (req, res) => {
   try {
     res.status(200).json(req.user);
   } catch (error) {
-    res.staus(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };

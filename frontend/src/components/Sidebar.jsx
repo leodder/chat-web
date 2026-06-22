@@ -37,7 +37,10 @@ const Sidebar = () => {
             <input
               type="checkbox"
               checked={showOnlineOnly}
-              onChange={(e) => setShowOnlineOnly(e.target.checked)}
+              onChange={(e) => {
+                // console.log("target.status", e.target.checked);
+                setShowOnlineOnly(e.target.checked);
+              }}
               className="checkbox checkbox-sm"
             />
             <span className="text-sm">Show online only</span>

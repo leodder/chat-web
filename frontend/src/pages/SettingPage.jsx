@@ -37,7 +37,9 @@ const SettingPage = () => {
             //   {i}
             //   </div>
             <button
-              onClick={() => setTheme(i)}
+              onClick={() => {
+                // console.log(i);
+                setTheme(i)}}
               key={i}
               className={`group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors ${
                 theme === i ? "bg-base-200" : "hover:bg-base-200/50"
@@ -71,7 +73,7 @@ const SettingPage = () => {
                 <div className="px-4 py-3 border-b border-base-300 bg-base-100">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-content font-medium">
-                      {authUser?.fullName.charAt(0).toUpperCase() || "J"}
+                      {authUser?.fullName?.charAt(0).toUpperCase() || "J"}
                     </div>
                     <div>
                       <h3 className="font-medium text-sm">

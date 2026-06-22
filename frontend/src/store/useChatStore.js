@@ -31,7 +31,7 @@ export const useChatStore = create((set, get) => ({
       // toast.success("Messages loaded successfully");
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to load messages.");
-      console.log("Error in getMessages:".error);
+      console.log("Error in getMessages:",error);
     } finally {
       set({ isMessageLoading: false });
     }
@@ -55,7 +55,7 @@ export const useChatStore = create((set, get) => ({
 
     socket.on("newMessage", (newMessage) => {
       const isMessageSentFromSelectedUser =
-        newMessage.senderId !== selectedUser._id;
+        newMessage.senderId === selectedUser._id;
       if (!isMessageSentFromSelectedUser) return;
       set({
         messages: [...get().messages, newMessage],
